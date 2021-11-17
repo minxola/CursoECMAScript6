@@ -1,5 +1,5 @@
 /*
-1.1.    DEFAULT PARAMS
+2.1.    DEFAULT PARAMS
 */
 
 //antes
@@ -22,7 +22,7 @@ newFuntion2(); //Oscar, 32, MX
 newFuntion2('Tim', 30, 'RU'); // Tim, 30, RU
 
 /*
-1.2.    TEMPLATE LITERALS (Concatenación)
+2.2.    TEMPLATE LITERALS (Concatenación)
 */
 
 let hello = "Hello";
@@ -31,5 +31,85 @@ let phrase = hello + ' ' + world;
 console.log(phrase); //Hello World!
 
 //ES6
-let phrase2 = `${hello} ${world}`; //Hello World!
+let phrase2 = `${hello} ${world}`;
+console.log(phrase2); //Hello World!
 
+/*
+3.1. MULTILINEA
+*/
+//Antes
+let lorem = "Some epic phrase \n"
++ "another epic phrase.";
+
+console.log(lorem);
+//Some epic phrase
+//another epic phrase.
+
+//ES6
+let lorem2 = `Some epic phrase
+another epic phrase.
+`;
+
+console.log(lorem2);
+//Some epic phrase
+//another epic phrase.
+
+/*
+3.2. DESESTRUCTURACION
+*/
+let person = {
+    'name': 'Oscar',
+    'age': 32,
+    'country': 'MX'
+}
+
+//Antes
+console.log(person.name, person.age);
+// Oscar, 32
+
+//ES6
+let {name, age} = person;
+console.log(name, age);
+// Oscar, 32
+
+/*
+3.3. OPERADOR DE PROPAGACIÓN (Spread Operator)
+*/
+let tema1 = ['Oscar', 'Julian', 'Tim'];
+let team2 = ['Valera', 'Yesica', 'Kim'];
+
+let school = ['Roger', ...tema1, ...team2];
+
+console.log(school);
+/*
+[
+  'Roger',  'Oscar',
+  'Julian', 'Tim',
+  'Valera', 'Yesica',
+  'Kim'
+]
+*/
+
+/*
+3.4. let
+*/
+{
+    var globalVar = "Global var";
+}
+
+{
+    let globalLet = "Global Let"
+    console.log(globalLet); //Global Let
+}
+
+console.log(globalVar); //Global var
+console.log(globalLet); //ReferenceError: globalLet is not defined
+
+/*
+3.5. const
+*/
+const a = 'b';
+console.log(a);
+
+a = 'a';
+console.log(a); //TypeError: Assignment to constant variable.
