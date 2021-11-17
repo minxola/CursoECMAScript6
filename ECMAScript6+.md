@@ -181,7 +181,35 @@ console.log(a); //TypeError: Assignment to constant variable.
 
 
 
+## 4. Parametros en objetos, arrow functions, promesas
 
+### 4.1. Parametros en objetos
+
+Nos permite crear objetos de una manera mas amigable.
+
+```js
+let name = 'Oscar';
+let age = 32;
+
+//ES5
+obj = {name: name, age: age};
+console.log(obj); //{ name: 'Oscar', age: 32 }
+
+//ES6
+obj2 = {name, age};
+console.log(obj2);//{ name: 'Oscar', age: 32 }
+```
+
+### 4.2. Arrow functions
+
+Las **arrow functions** o **funciontes flecha** son funciones anónimas. Permiten crear funciones de una manera mucho mas amigable y entendible.
+
+```js
+const names = [
+    {name: 'Oscar', age: 32}
+    {name: 'Tim', age: 22}
+]
+```
 
 
 

@@ -113,3 +113,63 @@ console.log(a);
 
 a = 'a';
 console.log(a); //TypeError: Assignment to constant variable.
+
+/*
+4.1. PARAMETROS EN OBJETOS
+*/
+let name = 'Oscar';
+let age = 32;
+
+//ES5
+obj = {name: name, age: age};
+console.log(obj); //{ name: 'Oscar', age: 32 }
+
+//ES6
+obj2 = {name, age};
+console.log(obj2);//{ name: 'Oscar', age: 32 }
+
+/*
+4.2. ARROW FUNCTIONS
+*/
+const names = [
+    {name: 'Oscar', age: 32},
+    {name: 'Tim', age: 22}
+]
+
+let listOfNames = names.map(function(item){
+    console.log(item.name);
+})
+
+//Las arrow functions son funciones anónimas
+let listOfNames2 = names.map(item => console.log(item.name));
+
+//función anónima en forma de arrow function
+const listOfNames3 = (name, age, country) => {
+    //code goes here...
+}
+
+//solo con un elemento o parametro
+const listOfNames4 = name => {
+    //code goes here...
+}
+
+//función que eleva un numero dado al cuadrado en forma de arrow function.
+const square = num => num*num;
+
+/*
+4.3. PROMISES, para manejar asincronismo
+*/
+const helloPromise = () => {
+    return new Promise((resolve, reject) => {
+        if(true){
+            resolve("Hey!");
+        } else{
+            reject("Ups!");
+        }
+    });
+}
+
+helloPromise()
+    .then(response => console.log(response))
+    .then(() => console.log("Hola"))
+    .catch(error => console.log(error));
