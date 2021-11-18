@@ -173,3 +173,52 @@ helloPromise()
     .then(response => console.log(response))
     .then(() => console.log("Hola"))
     .catch(error => console.log(error));
+
+
+/*
+5.1. CLASES
+*/
+//Las clases tienen un constructor y uno o mas métodos
+class Calculator {
+    constructor(){
+        this.valueA = 0;
+        this.valueB = 0;
+    }
+    sum(valueA, valueB){
+        this.valueA = valueA;
+        this.valueB = valueB;
+        return this.valueA + this.valueB;
+    }
+}
+//se utiliza así:
+const calc = new Calculator();
+console.log(calc.sum(2,2)); //4
+
+/*
+5.2. MODULOS (Import y Export)
+*/
+
+import { hello } from './module';
+
+hello();
+
+/*
+5.3. Generators
+*/
+function* helloWorld(){
+    if(true){
+        yield 'Hello, ';
+    }
+    if(true){
+        yield 'World';
+    }
+}
+
+const generatorHello = helloWorld();
+console.log(generatorHello.next().value);
+console.log(generatorHello.next().value);
+console.log(generatorHello.next().value);
+
+//Hello,
+//world
+//undefined
