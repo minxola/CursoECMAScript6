@@ -71,7 +71,7 @@ Ahora con las nuevas características de ES6 usando las comillas francesas , pod
 let phrase2 = `${hello} ${world}`;
 console.log(phrase2); //Hello World!
 ```
-## 3. Multilínea, Spread Operator, Desestructuración, Let, Const
+## 3. ES6: Multilínea, Spread Operator, Desestructuración, Let, Const
 
 ### 3.1 Multilínea
 
@@ -181,7 +181,7 @@ console.log(a); //TypeError: Assignment to constant variable.
 
 
 
-## 4. Parametros en objetos, arrow functions, promesas
+## 4. ES6: Parametros en objetos, arrow functions, promesas
 
 ### 4.1. Parametros en objetos
 
@@ -284,7 +284,7 @@ Si a la condición le colocamos *false* se obtendría:
 //Ups!
 ```
 
-## 5. Clases, módulos y generadores
+## 5. ES6: Clases, módulos y generadores
 
 ### 5.1. Clases
 
@@ -464,6 +464,36 @@ Ejemplo de un iterador infinito:
 	console.log(gen.next().value); // 1
 	console.log(gen.next().value); // 2
 	// ...
+```
+
+## 6. ES7: Que se implementó en ECMAScript 7
+
+### 6.1. Includes()
+
+Es un metodo que nos ayuda a verificar si existe determinado valor dentro de un array.
+
+```js
+let numbers = [1,2,4,7,9];
+
+if(numbers.includes(7)){
+    console.log('Si está el valor 7');
+} else {
+    console.log('No esta el número pedido');
+}
+```
+
+Como podemos ver podemos hacer ciertas validaciones y crear condicionales haciendo uso del método `inclues`.
+
+### 6.2. Potenciación (pow)
+
+Se añadió otra manera de hacer potencia de un valor numérico, para esto se asigno el doble asterisco `**` como operador de potencia.
+
+```js
+let base = 4;
+let exponent = 3;
+let result = base ** exponent;
+
+console.log(result);//64
 ```
 
 
