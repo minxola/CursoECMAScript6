@@ -496,9 +496,9 @@ let result = base ** exponent;
 console.log(result);//64
 ```
 
-## 8. ECMA Script 8, que se implementó
+## 7. ES8: Object (entries, values, keys), padstring, trailing commas
 
-### 8.1. Object.entries
+### 7.1. Object.entries
 
 El método `Object.entries()` devuelve una matriz de una propiedad enumerable [key, value] de un objeto dado, en el mismo orden proporcionado por `for...in` (la diferencia es que en un bucle for-in enumera las propiedades en la cadena de prototipos)
 
@@ -521,7 +521,7 @@ console.log(elementos.length); //3
 
 ```
 
-### 8.2. Object.values
+### 7.2. Object.values
 
 El método `Object.values()` devuelve un array con los valores correspondientes a las propiedades **enumarables** de un objeto.
 
@@ -538,7 +538,7 @@ console.log(values); //[ 'Oscar', 'Isabel', 'Ana' ]
 console.log(values.length); //3
 ```
 
-### 8.3. Objects.keys
+### 7.3. Objects.keys
 
 El método `Object.keys()` devuelve un array de las propiedades `names` de un objeto, en el mismo orden como se obtienen en un loop normal.
 
@@ -556,7 +556,7 @@ console.log(keys.length); //3
 
 
 
-### 8.4. PadString
+### 7.4. PadString
 
 #### `padStart`
 
@@ -574,7 +574,7 @@ console.log(string.padEnd(12, '_____')); //Hello_____
 
 
 
-### 8.5. Trailing commas
+### 7.5. Trailing commas
 
 Las **trainling commas** o comas finales, son útiles cuando se quiere agregar nuevos elementos, parámetros o propiedades al código de JavaScript.
 
@@ -604,6 +604,49 @@ function myFunct(x,){...}
 ```
 
 De la misma manera pueden usarse en la destructuración y en JSON.
+
+## 8. ES8: async y await
+
+### async
+
+La declaración de función `async` define una función asíncrona, la cual devuelve un objeto `AsyncFunction`.
+
+Es posible definir también funciones asíncronas a través de fun expresión de de función `async`.
+
+Una función `async` puede contener una expresión `await`, la cual pausa la ejecución de la función asíncrona y espera la resolución de la `Promise` pasada y, a continuación, reanuda la ejecución de la función `async` y devuelve el valore resuelto.
+
+### await
+
+El operador `await` es usado para esperar a una `Promise`. Sólo puede ser usado dentro de una función asíncrona `async function`.
+
+```js
+const helloWorld = () => {
+  return new Promise((resolve, reject) => {
+    (true)
+      ? setTimeout(() => resolve('Hello world!'), 5000)
+      : reject(new Error('Test Error'))
+  })
+}
+
+const helloAsync = async () => {
+  const hello = await helloWorld();
+  console.log(hello);
+}
+
+helloAsync();
+
+//Otra forma de llamar a helloWorld()
+const otherFunction = async () => {
+  try {
+    const hello = await helloWorld();
+    console.log(hello);
+  } catch (error){
+    console.log(error);
+  }
+};
+
+otherFunction();
+```
 
 
 
