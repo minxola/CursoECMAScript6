@@ -496,7 +496,114 @@ let result = base ** exponent;
 console.log(result);//64
 ```
 
+## 8. ECMA Script 8, que se implementó
 
+### 8.1. Object.entries
+
+El método `Object.entries()` devuelve una matriz de una propiedad enumerable [key, value] de un objeto dado, en el mismo orden proporcionado por `for...in` (la diferencia es que en un bucle for-in enumera las propiedades en la cadena de prototipos)
+
+```js
+const data = {
+    frontend: 'Oscar',
+    backend: 'Isabel',
+    design: 'Ana',
+}
+
+const elementos = Object.entries(data);
+
+console.log(elementos);
+/* [ [ 'frontend', 'Oscar' ],
+  [ 'backend', 'Isabel' ],
+  [ 'design', 'Ana' ] ]
+*/
+
+console.log(elementos.length); //3
+
+```
+
+### 8.2. Object.values
+
+El método `Object.values()` devuelve un array con los valores correspondientes a las propiedades **enumarables** de un objeto.
+
+```js
+const data = {
+    frontend: 'Oscar',
+    backend: 'Isabel',
+    design: 'Ana',
+}
+
+const values = Object.values(data);
+
+console.log(values); //[ 'Oscar', 'Isabel', 'Ana' ]
+console.log(values.length); //3
+```
+
+### 8.3. Objects.keys
+
+El método `Object.keys()` devuelve un array de las propiedades `names` de un objeto, en el mismo orden como se obtienen en un loop normal.
+
+```js
+const data = {
+    frontend: 'Oscar',
+    backend: 'Isabel',
+    design: 'Ana',
+}
+const keys = Object.keys(data);
+
+console.log(keys); //[ 'frontend', 'backend', 'design' ]
+console.log(keys.length); //3
+```
+
+
+
+### 8.4. PadString
+
+#### `padStart`
+
+Rellena una cadena desde el principio con una cadena dada y devuelve un nuevo string con la longitud objetivo.
+
+#### `padEnd`
+
+Rellena un string desde el final con una cadena dada y devuelve un nuevo string con la longitud objetivo.
+
+```js
+const string = 'Hello';
+console.log(string.padStart(7, 'Hi')); //HiHello
+console.log(string.padEnd(12, '_____')); //Hello_____
+```
+
+
+
+### 8.5. Trailing commas
+
+Las **trainling commas** o comas finales, son útiles cuando se quiere agregar nuevos elementos, parámetros o propiedades al código de JavaScript.
+
+Consiste en agregar literalmente una comma al final: `,`
+
+```js
+//arrays
+var arr = [1, 2, 3,];
+
+//objects
+var object = {
+    foo: 'bar',
+    baz: 'querty',
+    age: 25,
+}
+```
+
+Las trailing comas no afectan la propiedades de las funciones o los argumentos.
+
+```js
+//funciones equivalentes
+function myFunct(x){...}
+function myFunct(x,){...}
+//o también
+(x) => {...};
+(x,) => {...};
+```
+
+De la misma manera pueden usarse en la destructuración y en JSON.
 
 
 
