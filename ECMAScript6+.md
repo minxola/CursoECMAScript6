@@ -648,7 +648,97 @@ const otherFunction = async () => {
 otherFunction();
 ```
 
+## ES9, implementación
 
+### 9.1. Rest properties (operador de reposo)
+
+**Rest properties** toma las *keys* de las propiedades enumerables que quedan al momento de hacer **desestructuración**. Las claves y sus valores son copiados en un nuevo objeto.
+
+```js
+const obj = {
+    name: 'oscar',
+    age: 32,
+    country: 'MX',
+};
+//podemos usar uno o mas claves
+let {name, ...all} = obj;
+console.log(name, all); //oscar { age: 32, country: 'MX' }
+
+//solo usando el objeto others
+let {country, ...others} = obj;
+console.log(others); //{ name: 'oscar', age: 32 }
+
+//tomando age y dejando lo demás
+let {age, ...more} = obj;
+console.log(more); //{ name: 'oscar', country: 'MX' }
+```
+
+### 9.2. Unión de objetos (spread operator)
+
+**Operador de Reposo**, No es lo mismo que el **spread operator**, ya que en este caso se copian las propiedades de un objeto hacia otro nuevo objeto. El **Spread Operator** ahora se puede usar para hacer generar o unir objetos. También se puede hacer lo mismo con arreglos o arrays.
+
+```js
+//spread operator se usa para crear nuevos objetos o arreglos
+let a = {x:1, y: 2};
+let b = {m:5, ...a};
+console.log(b); //{ m: 5, x: 1, y: 2 }
+```
+
+### 9.3 Método Finally
+
+El método `finally()` devuelve una `Promise`. Cuando la promesa se resuelve, sea exitosa o rechazada, la función de callback especificada será ejecutada. Esto ofrece una forma de ejecutar código sin impotar que se haya resuelto la promesa.
+
+```js
+const helloWorld = () => {
+    return new Promise((resolve, reject) => {
+        (true)
+            ? setTimeout (() => resolve ('Hello World!'), 5000)
+            : reject (new Error('Test Error'))
+    });
+};
+
+helloWorld()
+	//Arroja 'Hello World!' luego de 5 segundos
+    .then(response => console.log(response))
+	//En este caso no se da error, si hubiera: 'Test Error'
+    .catch(error => console.log(error))
+	//Esta línea se ejecuta al finalizar: 'Finalizó'
+    .finally(() => console.log('Finalizó'))
+```
+
+### 9.4. RegEx (REGULAR EXPRESIONS)
+
+El método `exec()` ejecuta una búsqueda sobre las coincidencias de una expresión regular en una cadena específica. Devuelve el resultado como *array* o *null*.
+
+Si se encuentran coincidencias, devuelve un array y actualiza las propiedades del objeto de la expresión regular. 
+
+El *array* devuelto contiene:
+
+- Primer elemento: Los elementos encontrados
+- Un elemento por cada parte de la expresión regular que se encuentre entre paréntesis y se encuentra dentro del texto que fue capturado.
+
+Si la búsqueda falla, el metodo *exec()* devuelve **null**.
+
+```js
+const regexData = /([0-9]{4})-([0-9]{2})-([0-9]{2})/;
+const match = regexData.exec('2021-11-22');
+console.log(match); /*
+[
+  '2021-11-22',
+  '2021',
+  '11',
+  '22',
+  index: 0,
+  input: '2021-11-22',
+  groups: undefined
+]
+*/
+const year = match[1];
+const month = match[2];
+const day = match[3];
+
+console.log(day, month, year); //22 11 2021
+```
 
 
 
