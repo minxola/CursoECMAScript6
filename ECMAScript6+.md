@@ -740,7 +740,137 @@ const day = match[3];
 console.log(day, month, year); //22 11 2021
 ```
 
+## 10. ES10 y sus implementaciones
 
+### 10.1. Método flat( )
+
+El método `flat()` crea una nueva matriz con todos los elementos de sub-array concatenados recursivamente hasta la profundidad especificada.
+
+```js
+var arr1 = [1, 2, [3, 4]];
+arr1.flat();
+// [1, 2, 3, 4]
+
+var arr2 = [1, 2, [3, 4, [5, 6]]];
+arr2.flat();
+// [1, 2, 3, 4, [5, 6]]
+
+var arr3 = [1, 2, [3, 4, [5, 6]]];
+arr3.flat(2);
+// [1, 2, 3, 4, 5, 6]
+```
+
+Este método de aplanar elimina también ranuras vacías en las matrices.
+
+```js
+var arr4 = [1, 2, , 4, 5];
+arr4.flat();
+// [1, 2, 4, 5]
+```
+
+### 10.2. Método flatMap()
+
+- El método `flatMap()` primero mapea cada elemento usando la función de mapeo.
+- Luego aplana el resultado en una nueva matriz.
+
+El método `flatMap()` es igual a: un `map()` seguido de un `flat()` de profundidad 1. El método `flatMap` es mas eficiente que el uso de ambos métodos mencionados.
+
+```js
+var arr1 = [1, 2, 3, 4];
+
+//Usando solo el método map()
+arr1.map(x => [x * 2]);
+// [[2], [4], [6], [8]]
+
+//Uso de flatMap()
+arr1.flatMap(x => [x * 2]);
+// [2, 4, 6, 8]
+
+// solo un nivel es aplanado
+arr1.flatMap(x => [[x * 2]]);
+// [[2], [4], [6], [8]]
+```
+
+### 10.3. trimStart() y trimEnd()
+
+#### trimStart()
+
+El método `trimStart()` elimina el espacio en blanco que se encuentré al inicio de una cadena (string). `trimLeft()` es un alias de este método.
+
+```js
+let hello = '    Hello World';
+let helloNew = hello.trimStart();
+
+//se imprime incluyendo los espacios iniciales
+console.log(hello);
+//    Hello World
+
+//trimStart() elimina los espacios iniciales
+console.log(helloNew);
+//Hello World
+```
+
+#### trimEnd()
+
+El método `trimEnd()` elimina los espacios en blanco al final de una cadena de carácteres. `trimRight()` es el alias de este método.
+
+```js
+let phrase = 'Hello World!        ';
+let newPhrase = phrase.trimEnd();
+
+//Se imprime con todos los espacios al final
+console.log(phrase);//Hello World!    
+console.log(phrase.length); //20
+
+//trimEnd() el quita el espaciado al final    
+console.log(newPhrase);//Hello World!
+console.log(newPhrase.length); //12
+```
+
+### 10.4. try catch error opcional
+
+Anteriormente al momento de hacer uso de `try catch` se tenía que usar `(error)`, sin embargo en ES10 es opcional.
+
+```js
+//Anteriormente
+try{
+    //code...
+} catch (error){
+    //error code
+}
+
+//en ES10
+try{
+    //code
+} catch {
+    //error code
+}
+```
+
+### 10.5. fromEntries()
+
+El método `Object.fromEntries()` transforma una lista de pares con [clave, valor] en un objeto.
+
+```js
+let entries = [["name", "Oscar"], ["age", 32]];
+
+let obj = Object.fromEntries(entries);
+
+console.log(obj);//{ name: 'Oscar', age: 32 }
+```
+
+### 10.6. Symbol
+
+Symbol es un tipo de dato cuyos valores son únicos e inmutables. Dichos valores pueden ser utilizados como identificadores (claves) de las propiedades de los objetos. Cada valor del tipo *Symbol* tiene asociado un valor del tipo *String* o *Undefined* que sirve unicamente como descripción del símbolo.
+
+La función `Symbol` es el constructor de valores del tipo **Symbol**. Cuando **Symbol** es llamado como función nos devuelve un nuevo valor del tipo **Symbol**. El constructor **Symbol** no debe ser usado con el operador `new`. Tampoco debe ser extendido mediante clases.
+
+```js
+let mySymbl = `My Symbol`;
+let symbol = Symbol(mySymbl);
+console.log(symbol.description);//My Symbol
+console.log(typeof symbol); //"symbol"
+```
 
 
 
