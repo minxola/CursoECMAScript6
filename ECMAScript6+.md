@@ -1007,3 +1007,114 @@ if(user?.profile?.email){
 }
 ```
 
+## 13. ECMAScript 2021 (ES12)
+
+### 13.1. Método replaceAll()
+
+El método `replaceAll()` devuelve un nuevo string con todas las coincidencias reemplazadas con la cadena de reemplazo.
+
+```js
+//Cadena en la que se quiere reemplazar
+const str = "JavaScript es maravilloso, con JavaScript puedo crear le futuro de la web";
+
+//Usando Replace, solo reemplaza el primer elemento
+const replaceStr = str.replace("JavaScript", "Python");
+
+console.log(replaceStr);
+//Python es maravilloso, con JavaScript puedo crear le futuro de la web
+
+
+//Usando replaceAll() se reemplazan todas las coincidencias
+const string = str.replaceAll("JavaScript", "Python");
+
+console.log(string);
+//Python es maravilloso, con Python puedo crear le futuro de la web
+
+```
+
+### 13.2. Campos de clase privados
+
+Las propiedades de la clase son públicas de forma predeterminada y se pueden examinar o modificar fuera de la clase. Sin embargo, existe una propuesta experimental para permitir la definición de campos de la clase privados utilizando el `#` prefijo hash.
+
+```js
+//Predeterminado
+class Message {
+    show(val){
+        console.log(val);
+    };
+}
+
+const message = new Message();
+message.show("Hola"); //Hola
+
+//Agregando # para hacerlo un método privado
+//El método solo podrá ser accedido dentro de la clase
+class Message {
+    #show(val){
+        console.log(val);
+    };
+}
+
+const message = new Message();
+message.show("Hola"); //message.show is not a function
+```
+
+### 13.3. Promise.any()
+
+`Promise.any()` toma un conjunto de promesas y retorna la promesa que se resuelve primero con el valor del resultado de la promesa. Si todas las promesas son rechazadas devuelve un **AggregateError** `[AggregateError: All promises were rejected]`.
+
+```js
+const promise1 = new Promise((resolve, reject) => reject("1"));
+const promise2 = new Promise((resolve, reject) => resolve("2"));
+const promise3 = new Promise((resolve, reject) => resolve("3"));
+
+Promise.any([promise1, promise2, promise3])
+    .then(response => console.log(response)); //2
+```
+
+### 13.4. WeakRef (Referencia debil)
+
+Un objeto WeakRef le permite mantener una referencia débil a otro objeto, sin evitar que ese objeto sea recolectado como basura.
+
+```js
+class anyClass {
+    constructor(element){
+        this.ref = new WeakRef(element);
+    }
+    {
+        //more code
+    }
+}
+```
+
+### 13.5. Nuevos operadores
+
+Un operador de asignación asigna un valor a su operando izquierdo basándose en el valor de su operando derecho. El operador de asignación simple es el igual (`=`), que asigna el valor de su operando derecho a su operando izquierdo. Es decir, `x = y` asigna el valor de `y` a `x`.
+
+```js
+//AND LÓGICO    x &&= y  es x && (x = y)
+let isTrue = true;
+let isFalse = false;
+console.log(isTrue &&= isFalse); //false
+
+//OR LOGICO    x ||= y  es x || (x = y)
+let isTrue = true;
+let isFalse = false;
+console.log(isTrue ||= isFalse); //true
+
+//NEGACIÓN LOGICA    x ??= y  es x ?? (x = y)
+let isTrue = undefined;
+let isFalse = false;
+console.log(isTrue ??= isFalse); //false
+```
+
+## 14. TC39 
+
+El comité tecnico 39 analiza propuestas para la proxima versión de ESNext.
+
+El proceso pasa por diversos estados hasta llegar a la especificación final.
+
+Link a la web oficial: [TC39](https://tc39.es/)
+
+>Fin del curso!
+
