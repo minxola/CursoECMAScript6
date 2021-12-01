@@ -1,6 +1,7 @@
 # Curso de ECMA Script 6+
 
 ---
+
 Profesor: Oscar Barajas Tavares
 Escuela: JavaScript
 Curso de @Platzi
@@ -71,6 +72,7 @@ Ahora con las nuevas características de ES6 usando las comillas francesas , pod
 let phrase2 = `${hello} ${world}`;
 console.log(phrase2); //Hello World!
 ```
+
 ## 3. ES6: Multilínea, Spread Operator, Desestructuración, Let, Const
 
 ### 3.1 Multilínea
@@ -178,8 +180,6 @@ console.log(a); //b
 a = 'a';
 console.log(a); //TypeError: Assignment to constant variable.
 ```
-
-
 
 ## 4. ES6: Parametros en objetos, arrow functions, promesas
 
@@ -452,18 +452,18 @@ console.log(generatorHello.next().value);
 Ejemplo de un iterador infinito:
 
 ```js
-	function* idMaker() {
-	    var index = 0;
-	    while(true)
-	        yield index++;
-	}
+    function* idMaker() {
+        var index = 0;
+        while(true)
+            yield index++;
+    }
 
-	var gen = idMaker(); // "Generator { }"
+    var gen = idMaker(); // "Generator { }"
 
-	console.log(gen.next().value); // 0
-	console.log(gen.next().value); // 1
-	console.log(gen.next().value); // 2
-	// ...
+    console.log(gen.next().value); // 0
+    console.log(gen.next().value); // 1
+    console.log(gen.next().value); // 2
+    // ...
 ```
 
 ## 6. ES7: Que se implementó en ECMAScript 7
@@ -518,7 +518,6 @@ console.log(elementos);
 */
 
 console.log(elementos.length); //3
-
 ```
 
 ### 7.2. Object.values
@@ -554,8 +553,6 @@ console.log(keys); //[ 'frontend', 'backend', 'design' ]
 console.log(keys.length); //3
 ```
 
-
-
 ### 7.4. PadString
 
 #### `padStart`
@@ -571,8 +568,6 @@ const string = 'Hello';
 console.log(string.padStart(7, 'Hi')); //HiHello
 console.log(string.padEnd(12, '_____')); //Hello_____
 ```
-
-
 
 ### 7.5. Trailing commas
 
@@ -698,11 +693,11 @@ const helloWorld = () => {
 };
 
 helloWorld()
-	//Arroja 'Hello World!' luego de 5 segundos
+    //Arroja 'Hello World!' luego de 5 segundos
     .then(response => console.log(response))
-	//En este caso no se da error, si hubiera: 'Test Error'
+    //En este caso no se da error, si hubiera: 'Test Error'
     .catch(error => console.log(error))
-	//Esta línea se ejecuta al finalizar: 'Finalizó'
+    //Esta línea se ejecuta al finalizar: 'Finalizó'
     .finally(() => console.log('Finalizó'))
 ```
 
@@ -872,7 +867,143 @@ console.log(symbol.description);//My Symbol
 console.log(typeof symbol); //"symbol"
 ```
 
+## 11. ECMAScript 2020 o ES11: Implementaciones
 
+### 11.1. Importación dinámica
 
+La **Importación dinámica** nos permite indicar entre paréntesis del *import* el nombre del archivo JavaScript. 
 
+A diferencia del *'Impor estático'*, este fichero no se cargará siempre y desde el principio, sino que sólo lo hará cuando se llegue a esta parte del código, siendo posible incluirla dentro de condicionales, funciones o lógica diversa. 
+
+Si el archivo `.js` importado **es un módulo**, al trabajar con la promesa que devuelve simplemente accedemos a las propiedades o métodos que necesitemos. Por otro lado, si el archivo `.js` cargado **no es un módulo**, simplemente se ejecutará su contenido.
+
+```js
+//idex.js
+const button = document.querySelector("#btn");
+
+button.addEventListener("click", async function () {
+    const module = await import("./file.js");
+    module.hello();
+});
+```
+
+En otro archivo .js que es un módulo:
+
+```js
+//file.js
+export function hello() {
+    console.log("Hola mundo!");
+}
+```
+
+El archivo index.html:
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+</head>
+<body>
+    <button id="btn">File</button>
+    <script type="module" src="index.js"></script>
+</body>
+</html>
+```
+
+Al cargar el archivo index.html, el código del archivo file.js no se cargará, este código solo se cargará si se hace clic en el botón, ya que en ese momento se hace la **Importación dinámica**, en la consola se mostrará "Hola mundo!".
+
+### 12.1. BigInt
+
+`BigInt` es un objeto de JavaScript cuyo constructor retorna un valor primitivo *bigint* llamado también **BigInt value** o solo **BigInt**, que representa un numero largo como 2^53-1 (Number.MAX_SAFE_INTEGER), que es el número mas largo que JavaScript puede representar como numero entero (*number*).
+
+```js
+//agregar n permite usar numeros grandes
+const bigNumber = 9007199254740991n;
+
+console.log(bigNumber);
+//9007199254740992n
+
+//Ahora se puede usar BigInt() para lo mismo
+const otherBigNumber = BigInt(9007199254740991);
+
+console.log(otherBigNumber);
+//9007199254740992n
+```
+
+### 12.2. Promise.allSettled
+
+El método `Promise.allSettled()` retorna un promesa que se resuelve después de que todas las promesas dadas hayan sido resueltas o rechazadas, con un array de objetos que describen a cada promesa.
+
+Se usa cuando hay varias tareas asíncronas que no dependen unas de las otras para completarse satisfactoriamente. 
+
+La diferencia con `Promise.all()`  es que esta se debe usar cuando las tareas son dependientes entre sí o si se quiere rechazar todo si alguna de ellas es rechazada.
+
+```js
+const promise1 = new Promise((resolve, reject) => reject("reject"));
+const promise2 = new Promise((resolve, reject) => resolve("resolve"));
+const promise3 = new Promise((resolve, reject) => resolve("resolve 1"));
+
+Promise.allSettled([promise1, promise2, promise3])
+    .then(response => console.log(response));
+
+/*
+[
+  { status: 'rejected', reason: 'reject' },
+  { status: 'fulfilled', value: 'resolve' },
+  { status: 'fulfilled', value: 'resolve 1' }
+]
+*/
+```
+
+### 12.3. globalThis
+
+La propiedad `globalThis` contiene el valor global `this`, que es parecido al objeto global.
+
+```js
+//Propiedes disponibles en navegador
+console.log(window); //Window{...}
+console.log(self); //Window{...}
+console.log(frames); //Window{...}
+console.log(this); //Window{...}
+
+//funciona en todas las plataformas
+console.log(globalThis);
+```
+
+### 12.4. Operador de fusión nula (??)
+
+El operador `??` (operador de fusión nula), es un operador lógico que retorna el lado derecho cuando su lado izquierdo es `null` o `undefined`, de otro modo retorna siempre el lado izquierdo.
+
+```js
+const foo = null ?? 'default string';
+console.log(foo); //default string
+
+const fizz = 'string' ?? 'default string';
+console.log(fizz); //string
+
+const baz = 0 ?? 10;
+console.log(baz); //0
+```
+
+### 12.5. Encadenamiento opcional o Optional Channing
+
+El operador de **encadenamiento opcional** **`?.`** permite leer el valor de una propiedad ubicada dentro de una cadena de objetos conectados sin tener que validar expresamente que cada referencia en la cadena sea válida. El operador `?.` funciona de manera similar a el operador de encadenamiento `.`, excepto que en lugar de causar un error si una referencia es casi nula (`null` o `undefined`), la expresión hace una evaluación de circuito corto con un valor de retorno de `undefined`. Cuando se usa con llamadas a funciones, devuelve `undefined` si la función dada no existe.
+
+```js
+const user = {};
+console.log(user.profile.email);
+//TypeError: Cannot read properties...
+
+//ES11: no rompe la aplicación con error
+const user = {};
+console.log(user?.profile?.email);
+//undefined
+
+//ejemplo de uso
+if(user?.profile?.email){
+    console.log('email');
+} else {
+    console.log('Fail');
+}
+```
 
